@@ -8,8 +8,14 @@ A new version of interactive "Game of Thrones" map powered by Leaflet, PostGIS, 
 
 ## Prerequisites
 
-### Git
+Here are the prerequisite tools and howtos which must be installed before proceeding with the Setup.
 
+1. How to open a command line interpreter
+- Locate the 'Windows search input field' (it should be on left bottom, just beside the 'Start' button)
+- Type 'cmd' then hit key ![Return](https://github.com/echopraxium/Atlas-Of-Thrones/assets/icons/ReturnKey.png "Return Key")
+Refs:  https://www.pcmag.com/how-to/how-to-search-in-windows-10
+
+2. Git 
 Download and install the Git installer (https://git-scm.com/download/win)
 
 ## Setup (Windows 10)
