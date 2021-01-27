@@ -12,7 +12,7 @@ Here are the prerequisite tools and howtos which must be installed before procee
 
 1. How to open a command line interpreter
 - Locate the 'Windows search input field' (it should be on left bottom, just beside the 'Start' button)
-- Type 'cmd' then hit ![Return Key](https://github.com/Echopraxium/Atlas-Of-Thrones/assets/icons/ReturnKey.png "Return Key")
+- Type 'cmd' then hit ![Return Key](https://github.com/Echopraxium/Atlas-Of-Thrones/tree/backend-starter/assets/icons/ReturnKey.png "Return Key")
 Refs:  https://www.pcmag.com/how-to/how-to-search-in-windows-10
 
 2. Git 
