@@ -1,4 +1,4 @@
-## Atlas Of Thrones - A Setup guide for Noobs
+## Atlas Of Thrones - A Setup tutorial for Noobs
 
 ### Introduction
 
@@ -42,6 +42,10 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
      - http://download.osgeo.org/postgis/windows/pg13/ then select:
 
        postgis-bundle-pg13x64-setup-3.1.0-1.exe
+     
+   - Create the '**gotfan**' database user
+
+     Note: The original user is '**patrick**' (first name of original project author) but in this guide it will be replaced by '**gotfan**'
 
 ### 2. Setup (Windows 10)
 
@@ -61,13 +65,13 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
    ```
    PORT=5000
-   DATABASE_URL=postgres://patrick@localhost:5432/atlas_of_thrones?ssl=false
+   DATABASE_URL=postgres://gotfan@localhost:5432/atlas_of_thrones?ssl=false
    REDIS_HOST=localhost
    REDIS_PORT=6379
    CORS_ORIGIN=http://localhost:8080 
    ```
 
-   You'll need to change the username in the **DATABASE_URL** entry to match your *PostgresQL* user credentials. Unless your name is "patrick", that is, in which case it might already be fine.
+   Note: the username in the **DATABASE_URL** entry to match your *PostgresQL* user credentials, hence it is "**gotfan**" as explained in Chapter 1 paragraph 4  (installation of *PostgresQL*).
 
 4. Start the *API Server*
 
