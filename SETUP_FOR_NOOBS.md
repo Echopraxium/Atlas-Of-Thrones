@@ -97,7 +97,7 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
        https://github.com/Echopraxium/Atlas-Of-Thrones/blob/backend-starter/data/gis/atlas_of_thrones.sql
        ```
 
-     - Select `Raw` in the ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar"), which is above the file content (NB: it's a *database sql dump*)
+     - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
 
      - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOP` as the destination folder
 
