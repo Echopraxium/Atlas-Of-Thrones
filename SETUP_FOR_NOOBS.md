@@ -109,24 +109,24 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
      CREATE EXTENSION postgis;
      ```
      
-      - 1.5.8. Download *GIS data* for *Atlas Of Thrones* map
+   - 1.5.8. Download *GIS data* for *Atlas Of Thrones* map
 
-          - Open the following link in your *Web Browser*
-
-            ```
-            https://github.com/Echopraxium/Atlas-Of-Thrones/blob/backend-starter/data/gis/atlas_of_thrones.sql
-            ```
-
-        - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
-
-        - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOT` as the destination folder
-
-        - Remove the  `.txt` extension in order to have just the following
-
-        ```
-           atlas_of_thrones.sql
-        ```
-
+       - Open the following link in your *Web Browser*
+     
+         ```
+         https://github.com/Echopraxium/Atlas-Of-Thrones/blob/backend-starter/data/gis/atlas_of_thrones.sql
+         ```
+     
+     - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
+     
+     - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOT` as the destination folder
+     
+     - Remove the  `.txt` extension in order to have just the following
+     
+     ```
+        atlas_of_thrones.sql
+     ```
+     
    - 1.5.9. Import *GIS data* provided by `atlas_of_thrones.sql` (downloaded in previous step)
      In the *1st Command prompt window* previously opened (cf. *Step 1.2*), type the following:
 
@@ -204,18 +204,35 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
     info: Connected To atlas_of_thrones at localhost:5432
     ```
 
-- 2.4. API Test 1: `hello` service
+- 2.4. Test `hello` API endpoint
 
   Open a *Web Browser* and type `localhost:5000/hello` in the URL input field.
 
   > You should see a page with 'Hello World' in the *Web Browser*
 
-- 2.5. API Test 2: `time` service
+- 2.5. Test `time` API endpoint
 
   Open a *Web Browser* and type `localhost:5000/time` in the URL input field.
 
   > You should see a page with a text like this `{"now": "2021-01-28T16:17:47.319Z"}`
 
-- 2.6. API Test 3:
-- 2.7. API Test 4
+- 2.6. Test of`GeoJSON` API endpoint: Show Regions then Castles
+
+  - Open a *Web Browser* and type `http://localhost:5000/kingdoms`
+
+  - Select All *GeoJSON* *data* (`CTRL A`) and copy in Clipboard (`CTRL C`)
+
+  - Open in another tab of the *Web Browser* the *GeoJSON Preview page*
+
+    ```
+    https://cdn.patricktriest.com/atlas-of-thrones/geojsonpreview.html
+    ```
+
+  - Paste *GeoJSON* *data* (`CTRL V`) in the text box (where it's written '*Parse GeoJSON Here*' then push `Render`)
+
+  - Open a new tab of the *Web Browser* and type `http://localhost:5000/locations/castle`
+
+  - Copy All *GeoJSON* *data* (`CTRL A`   `CTRL C`)
+
+  - Select the tab with *GeoJSON Preview page* and Paste *GeoJSON* *data* (`CTRL V`) in the text box  then push `Render`)
 
