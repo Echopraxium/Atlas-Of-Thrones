@@ -9,21 +9,21 @@
   "author": "Patrick Triest <patrick.triest@gmail.com> (https://blog.patricktriest.com)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/triestpa/Atlas-Of-Thrones.git"
+    "url": "git+https://github.com/Echopraxium/Atlas-Of-Thrones.git"
   },
   "license": "MIT",
   "engines": {
     "node": ">=7.6.0"
   },
   "dependencies": {
-    "dotenv": "4.0.0",
+    "dotenv": "8.2.0",
     "ioredis": "3.1.4",
     "joi": "10.6.0",
-    "kcors": "2.2.1",
-    "koa": "2.3.0",
+    "kcors": "2.2.2",
+    "koa": "2.13.1",
     "koa-joi-validate": "0.5.1",
-    "koa-router": "7.2.1",
-    "pg": "7.2.0",
+    "koa-router": "10.0.0",
+    "pg": "8.5.1",
     "winston": "2.3.1"
   },
   "devDependencies": {

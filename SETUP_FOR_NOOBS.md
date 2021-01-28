@@ -26,11 +26,11 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
      
      > It's advised to open the command line interpreter as Administrator: right click on 'Command prompt' in panel then select *Run as Administrator*
 
-- 1.2. Create a *Temporary Folder* for *Step 1.5.7.* I suggest that you create a folder named '**AOT**' on **Disc C** by means of the *File Explorer*
+- 1.2. Create a *Temporary Folder* for *Step 1.5.8*, I suggest that you create a folder named '**AOT**' on **Disc C** by means of the *File Explorer*
 
    - Open a command prompt
      - Select Disc C: type `C:` then hit [Return] key
-     - Change current directory to `C:\AOP`  type `cd C:\AOP` then hit [Return] key
+     - Change current directory to `C:\AOT`  type `cd C:\AOT` then hit [Return] key
      - Keep the *Command prompt Window* opened for next steps
 
 - 1.3. **Git**: the most popular versioning tool (*esp.* for *Open Source* projects)
@@ -47,7 +47,7 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
    - 1.5.1. Download and install the *PostgresQL* installer (https://www.postgresql.org/)
 
-     > You will be asked to provide a password for the predefined administrator (`postgres`) , I advise a very straightforward password at this stage (e.g. '*postgres*' or '*admin*'), just take care to either remember it easily or write it down for *Step 1.5.3.*
+     > You will be asked to provide a password for the predefined administrator (`postgres`) , I advise a very straightforward password at this stage (e.g. '*postgres*' or '*admin*'), just take care to either remember it easily or write it down for *Step 1.5.4*
 
    - 1.5.2. Install *PostGIS* extension (GIS: *Geographic Information System*)
 
@@ -59,37 +59,58 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
      Now select: `postgis-bundle-pg13x64-setup-3.1.0-1.exe`
 
-   - 1.5.3. Create the `gotfan` database user
+   - 1.5.3. Open a *2nd Command prompt window* 
+
+     > NB: To open a new Command prompt window, use Step 1.1
+
+   - 1.5.4. Create the `gotfan` database user
 
      > The original user is `patrick`(first name of original project author) but in this tutorial it will be replaced by `gotfan`.
 
      - Open *PostgresQL prompt* and use the password that you choose for `postgres` user:
 
-       ```
-       psql -U postgres
-       ```
-
-     - Now create user '**gotfan**'  (with a straightforward password like '**gotfan**')
-       Note: it's important to keep this username as it's also used in the *database dump*  (`atlas_of_thrones.sql`) which will be downloaded and imported in *Step 1.5.6.*
-
-       ```
-       CREATE USER gotfan WITH PASSWORD 'gotfan';
-       ```
-
-   - 1.5.4. Create the '**atlas_of_thrones**'  database
-
      ```
-     CREATE DATABASE atlas_of_thrones;   
+     psql -U postgres
      ```
 
-   - 1.5.5. Grant privileges (access rights) to user '**gotfan**'
+     > NB: If you want to exit *PostgresQL prompt* just type `\q`
+
+     - Now create user `gotfan`  (with a straightforward password like `gotfan`)
+       Note: it's important to keep this username as it's also used in the *database dump*  (`atlas_of_thrones.sql`) which will be downloaded and imported in *Step 1.5.8.*
+
+       ```
+       CREATE USER gotfan WITH PASSWORD 'gotfan'
+       ```
+
+       NB: if for any reason you prefer another username, take it into account in the following steps and also you will have to edit `atlas_of_thrones.sql` at *Step 1.5.7* and change all occurences of `gotfan` by this alternate username
+
+   - 1.5.5. Create the `atlas_of_thrones` database
+
+     ```
+     CREATE DATABASE atlas_of_thrones  
+     ```
+
+     > NB: If you need to recreate the database, use `DROP DATABASE atlas_of_thrones`
+     >
+     > then recreate it with `CREATE DATABASE atlas_of_thrones`
+
+   - 1.5.6. Grant privileges (access rights) to user `gotfan`
 
      ```
      GRANT ALL PRIVILEGES ON DATABASE atlas_of_thrones to gotfan;
      GRANT SELECT ON ALL TABLES IN SCHEMA public TO gotfan;
      ```
 
-   - 1.5.6. Download *GIS data* for '*Atlas Of Thrones*' map
+   - 1.5.7. Connect to this new database and activate the *PostGIS* extension
+
+     Open the *2nd Command prompt window* (or reopen with *Step 1.5.3* if it was closed)
+
+     ```sql
+     \c atlas_of_thrones
+     CREATE EXTENSION postgis;
+   ```
+     
+   - 1.5.8. Download *GIS data* for '*Atlas Of Thrones*' map
 
      - Open the following link in your *Web Browser*
 
@@ -99,7 +120,7 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
      - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
 
-     - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOP` as the destination folder
+     - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOT` as the destination folder
 
      - Remove the  `.txt` extension in order to have just the following
 
@@ -107,16 +128,16 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
        atlas_of_thrones.sql
        ```
 
-   - 1.5.7. Import GIS data provided by `atlas_of_thrones.sql`  
-     In the Command prompt window previously opened (cf. *Step 1.2*), type the following:
+   - 1.5.9. Import *GIS data* provided by `atlas_of_thrones.sql` (downloaded in previous step)
+     In the *1st Command prompt window* previously opened (cf. *Step 1.2*), type the following:
 
      ```
-     psql -d atlas_of_thrones < C:\AOP\atlas_of_thrones.sql 
+     psql -d atlas_of_thrones < C:\AOT\atlas_of_thrones.sql 
      ```
 
-   - 1.5.8. Check if import is successful
+   - 1.5.10. Check if import is successful
 
-     - Set `atlas_of_thrones` as current database
+     - In *1st Command prompt window*, set `atlas_of_thrones` as current database (you will be asked to type the password for`gotfan` user which is `gotfan`)
 
        ```
        psql -d atlas_of_thrones -U gotfan
@@ -124,10 +145,12 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
      - Get the list of available tables in `atlas_of_thrones` database
 
+       In the 2nd Command prompt window (repeat step )
+     
        ```
-       \dt
+     \dt
        ```
-
+     
        > You should get:
        >
        > ```
@@ -137,56 +160,60 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
        >  public | kingdoms        | table | patrick
        >  public | locations       | table | patrick
        >  public | spatial_ref_sys | table | patrick
-       > (3 rows)
+     > (3 rows)
        > ```
 
      - Now you can exit *PostgresQL prompt*
-
+     
        ```
        \dt     
        ```
 
 ### 2. Backend setup (Windows 10)
 
-1. *Backend* (Server side) installation
+- 2.1. *Backend* (Server side) installation
+  - Open a command prompt
+  - git clone -b backend-starter https://github.com/Echopraxium/Atlas-Of-Thrones`
+  - `npm install`
+  - `npm audit fix`
 
-   - Open a command prompt
-   - git clone -b backend-starter https://github.com/Echopraxium/Atlas-Of-Thrones`
-   - `npm install`
-   - `npm audit fix`
+- 2.2. Add a `.env` configuration file
 
-3. Add a `.env` configuration file
+  `.env` file is meant to properly initialize the required environment variables.
 
-   `.env` file is meant to properly initialize the required environment variables.
+  Here's an example `.env` file with sensible defaults for local development
 
-   Here's an example `.env` file with sensible defaults for local development
+  ```
+  PORT=5000
+  DATABASE_URL=postgres://gotfan:gotfan@localhost:5432/atlas_of_thrones
+  REDIS_HOST=localhost
+  REDIS_PORT=6379
+  CORS_ORIGIN=http://localhost:8080
+  ```
 
-   ```
-   PORT=5000
-   DATABASE_URL=postgres://gotfan@localhost:5432/atlas_of_thrones?ssl=false
-   REDIS_HOST=localhost
-   REDIS_PORT=6379
-   CORS_ORIGIN=http://localhost:8080 
-   ```
+  > Note: the username in the **DATABASE_URL** entry must match your *PostgresQL* user credentials, hence it is "**gotfan**" as explained in Chapter 1 paragraph 4  (installation of *PostgresQL*).
 
-   Note: the username in the **DATABASE_URL** entry to match your *PostgresQL* user credentials, hence it is "**gotfan**" as explained in Chapter 1 paragraph 4  (installation of *PostgresQL*).
+- 2.3. Start the *API Server*
+  - Open a command prompt
 
-3. Start the *API Server*
+  - `npm start`
 
-   - Open a command prompt
+    This will start the *API server* on `localhost:5000`, you should see:
 
-   -  `npm start`
+    ```
+    info: Server listening at port 5000
+    info: Connected To atlas_of_thrones at localhost:5432
+    ```
 
-     > This will start the *API server* on `localhost:5000`
-     >
-     > You should see:
-     >
-     > ```
-     > info: Server listening at port 5000
-     > ```
+- 2.4. API Test 1: `hello` service
 
-4. Check if the *API server* is ready and if it provides the 'hello' service
+  Open a *Web Browser* and type `localhost:5000/hello` in the URL input field.
 
-   - Open a Web Browser and type `localhost:5000/hello` in the URL input field.
+  > You should see a page with 'Hello World' in the *Web Browser*
 
-     > You should see a page with 'Hello World' in the *Web Browser*
+- 2.5. API Test 2: `time` service
+
+  Open a *Web Browser* and type `localhost:5000/time` in the URL input field.
+
+  > You should see a page with a text like this `{"now": "2021-01-28T16:17:47.319Z"}`
+
