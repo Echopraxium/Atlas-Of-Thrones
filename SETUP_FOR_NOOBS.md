@@ -102,69 +102,67 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
      ```
 
    - 1.5.7. Connect to this new database and activate the *PostGIS* extension
-
-     Open the *2nd Command prompt window* (or reopen with *Step 1.5.3* if it was closed)
-
-     ```sql
+Open the *2nd Command prompt window* (or reopen with *Step 1.5.3* if it was closed)
+     
+```
      \c atlas_of_thrones
      CREATE EXTENSION postgis;
-   ```
+     ```
      
-   - 1.5.8. Download *GIS data* for '*Atlas Of Thrones*' map
-
-     - Open the following link in your *Web Browser*
-
-       ```
+   - 1.5.8. Download *GIS data* for *Atlas Of Thrones* map
+   
+  - Open the following link in your *Web Browser*
+   
+    ```
        https://github.com/Echopraxium/Atlas-Of-Thrones/blob/backend-starter/data/gis/atlas_of_thrones.sql
        ```
-
-     - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
-
-     - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOT` as the destination folder
-
-     - Remove the  `.txt` extension in order to have just the following
-
-       ```
-       atlas_of_thrones.sql
-       ```
-
-   - 1.5.9. Import *GIS data* provided by `atlas_of_thrones.sql` (downloaded in previous step)
+     
+    - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
+     
+    - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOT` as the destination folder
+     
+    - Remove the  `.txt` extension in order to have just the following
+     
+      ```
+         atlas_of_thrones.sql
+         ```
+     
+- 1.5.9. Import *GIS data* provided by `atlas_of_thrones.sql` (downloaded in previous step)
      In the *1st Command prompt window* previously opened (cf. *Step 1.2*), type the following:
-
-     ```
+   
+  ```
      psql -d atlas_of_thrones < C:\AOT\atlas_of_thrones.sql 
      ```
-
-   - 1.5.10. Check if import is successful
-
-     - In *1st Command prompt window*, set `atlas_of_thrones` as current database (you will be asked to type the password for`gotfan` user which is `gotfan`)
-
-       ```
+   
+- 1.5.10. Check if import is successful
+   
+  - In *1st Command prompt window*, set `atlas_of_thrones` as current database (you will be asked to type the password for`gotfan` user which is `gotfan`)
+   
+    ```
        psql -d atlas_of_thrones -U gotfan
        ```
-
-     - Get the list of available tables in `atlas_of_thrones` database
-
-       In the 2nd Command prompt window (repeat step )
-     
+   
+  - Get the list of available tables in `atlas_of_thrones` database
+   
+    In the 2nd Command prompt window (repeat *Step 1.1.1* if necessary)
+   
        ```
      \dt
        ```
-     
+   
        > You should get:
        >
        > ```
        > List of relations
-       >  Schema |      Name       | Type  |  Owner  
-       > --------+-----------------+-------+---------
-       >  public | kingdoms        | table | patrick
-       >  public | locations       | table | patrick
-       >  public | spatial_ref_sys | table | patrick
-     > (3 rows)
+       > Schema |      Name       | Type  |  Owner  
+       > -------+-----------------+-------+---------
+       > public | kingdoms        | table | patrick
+       > public | locations       | table | patrick
+       > public | spatial_ref_sys | table | patrick
+       > (3 rows)
        > ```
-
      - Now you can exit *PostgresQL prompt*
-     
+
        ```
        \dt     
        ```
@@ -216,4 +214,7 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
   Open a *Web Browser* and type `localhost:5000/time` in the URL input field.
 
   > You should see a page with a text like this `{"now": "2021-01-28T16:17:47.319Z"}`
+
+- 2.6. API Test 3:
+- 2.7. API Test 4
 
