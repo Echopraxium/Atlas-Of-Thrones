@@ -1,49 +1,67 @@
 {
   "name": "atlas-of-thrones",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "description": "Game of Thrones interactive map, powered by Leaflet, PostGIS, and Redis.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "start_local": "NODE_ENV=local node index.js",
+    "web_server": "http-server ./public",
+    "webpack_watch": "webpack --watch",
+    "serve": "webpack serve --content-base ./public/",
+    "dev": "npm-run-all -p start_local serve",
+    "build": "NODE_ENV=production webpack"
   },
-  "author": "Patrick Triest <patrick.triest@gmail.com> (https://blog.patricktriest.com)",
+  "author": {
+    "name": "Patrick Triest",
+    "email": "patrick.triest@gmail.com",
+    "url": "https://blog.patricktriest.com"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Echopraxium/Atlas-Of-Thrones.git"
+    "url": "https://github.com/triestpa/Atlas-Of-Thrones.git"
   },
-  "license": "MIT",
+  "license": {
+    "type": "CC-BY-NC-SA-3.0",
+    "url": "https://www.creativecommons.org/licenses/by-nc-sa/3.0/"
+  },
   "engines": {
-    "node": ">=7.6.0"
+    "node": "^12.0.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "8.2.0",
-    "ioredis": "3.1.4",
+    "file-loader": "^6.0.0",
+    "fuse.js": "^3.6.1",
     "joi": "10.6.0",
-    "kcors": "2.2.2",
-    "koa": "2.13.1",
+    "kcors": "2.2.1",
+    "koa": "^2.7.0",
     "koa-joi-validate": "0.5.1",
-    "koa-router": "10.0.0",
+    "koa-router": "^7.2.1",
+    "leaflet": "^1.7.1",
+    "leaflet-draw": "^1.0.4",
     "pg": "8.5.1",
+    "webpack-dev-server": "^3.11.2",
     "winston": "2.3.1"
   },
   "devDependencies": {
-    "eslint": "4.5.0",
+    "babel-loader": "^7.1.5",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "css-loader": "^5.0.1",
+    "eslint": "^4.5.0",
     "eslint-config-standard": "10.2.1",
-    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "5.1.1",
     "eslint-plugin-promise": "3.5.0",
-    "eslint-plugin-standard": "3.0.1"
-  },
-  "bugs": {
-    "url": "https://github.com/triestpa/Atlas-Of-Thrones/issues"
-  },
-  "homepage": "https://github.com/triestpa/Atlas-Of-Thrones#readme",
-  "keywords": [
-    "Interactive",
-    "map",
-    "Game",
-    "of",
-    "Thrones",
-    "GIS"
-  ]
+    "eslint-plugin-standard": "3.0.1",
+    "html-loader": "1.3.2",
+    "http-server": "^0.12.3",
+    "node-sass": "5.0.0",
+    "npm-run-all": "^4.1.5",
+    "sass-loader": "10.1.1",
+    "style-loader": "2.0.0",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.4.0"
+  }
 }

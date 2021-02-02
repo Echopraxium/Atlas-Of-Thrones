@@ -5,9 +5,7 @@ const postgres = require('pg')
 const log = require('./logger')
 const connectionString = process.env.DATABASE_URL
 
-// Initialize postgres client
 const client = new postgres.Client({ connectionString })
-
 
 // Connect to the DB
 client.connect().then(() => {
@@ -20,7 +18,7 @@ module.exports = {
     const result = await client.query('SELECT NOW() as now')
     return result.rows[0]
   },
-  
+
   /** Query the locations as geojson, for a given type */
   getLocations: async (type) => {
     const locationQuery = `
@@ -39,7 +37,7 @@ module.exports = {
     const result = await client.query(boundaryQuery)
     return result.rows
   },
-  
+
   /** Calculate the area of a given region, by id */
   getRegionSize: async (id) => {
     const sizeQuery = `
@@ -50,19 +48,19 @@ module.exports = {
     const result = await client.query(sizeQuery, [ id ])
     return result.rows[0]
   },
-  
+
   /** Count the number of castles in a region, by id */
   countCastles: async (regionId) => {
     const countQuery = `
-    SELECT count(*)
-    FROM kingdoms, locations
-    WHERE ST_intersects(kingdoms.geog, locations.geog)
-    AND kingdoms.gid = $1
-    AND locations.type = 'Castle';`
+      SELECT count(*)
+      FROM kingdoms, locations
+      WHERE ST_intersects(kingdoms.geog, locations.geog)
+      AND kingdoms.gid = $1
+      AND locations.type = 'Castle';`
     const result = await client.query(countQuery, [ regionId ])
     return result.rows[0]
   },
-  
+
   /** Get the summary for a location or region, by id */
   getSummary: async (table, id) => {
     if (table !== 'kingdoms' && table !== 'locations') {

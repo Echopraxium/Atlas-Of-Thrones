@@ -9,11 +9,16 @@ const joi = require('joi')
 const validate = require('koa-joi-validate')
 const router = new Router()
 
+/*
+// Note: if uncommented, generates following error
+//       TypeError: Cannot read property 'router' of undefined
+//
 // Check cache before continuing to any endpoint handlers
 router.use(cache.checkResponseCache)
 
 // Insert response into cache once handlers have finished
 router.use(cache.addResponseToCache)
+*/
 
 // Check that id param is valid number
 const idValidator = validate({
@@ -22,7 +27,8 @@ const idValidator = validate({
 
 // Check that query param is valid location type
 const typeValidator = validate({
-  params: { type: joi.string().valid(['castle', 'city', 'town', 'ruin', 'landmark', 'region']).required() }
+// params: { type: joi.string().valid(['castle', 'city', 'town', 'ruin', 'landmark', 'region']).required() }
+   params: { type: joi.string().valid('castle', 'city', 'town', 'ruin', 'landmark', 'region').required() }
 })
 
 // Hello World Test Endpoint
@@ -50,14 +56,14 @@ router.get('/locations/:type', typeValidator, async ctx => {
   })
 
   ctx.body = locations
-})
+}) // '/locations/:type'
 
 // Respond with summary of location, by id
 router.get('/locations/:id/summary', idValidator, async ctx => {
   const id = ctx.params.id
   const result = await database.getSummary('locations', id)
   ctx.body = result || ctx.throw(404)
-})
+}) // '/locations/:id/summary'
 
 // Respond with boundary geojson for all kingdoms
 router.get('/kingdoms', async ctx => {
@@ -72,7 +78,7 @@ router.get('/kingdoms', async ctx => {
   })
 
   ctx.body = boundaries
-})
+}) // '/kingdoms'
 
 // Respond with calculated area of kingdom, by id
 router.get('/kingdoms/:id/size', idValidator, async ctx => {
@@ -83,20 +89,20 @@ router.get('/kingdoms/:id/size', idValidator, async ctx => {
   // Convert response (in square meters) to square kilometers
   const sqKm = result.size * (10 ** -6)
   ctx.body = sqKm
-})
+}) // '/kingdoms/:id/size'
 
 // Respond with summary of kingdom, by id
 router.get('/kingdoms/:id/summary', idValidator, async ctx => {
   const id = ctx.params.id
   const result = await database.getSummary('kingdoms', id)
   ctx.body = result || ctx.throw(404)
-})
+}) // '/kingdoms/:id/summary'
 
 // Respond with number of castle in kingdom, by id
 router.get('/kingdoms/:id/castles', idValidator, async ctx => {
   const regionId = ctx.params.id
   const result = await database.countCastles(regionId)
   ctx.body = result ? result.count : ctx.throw(404)
-})
+}) // '/kingdoms/:id/castles'
 
 module.exports = router

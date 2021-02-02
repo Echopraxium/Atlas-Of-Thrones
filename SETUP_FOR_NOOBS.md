@@ -37,11 +37,20 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
    - Download and install the *Git* installer: https://git-scm.com/download/win
 
-- 1.4. **NodeJS**: a runtime environment which allow to run *Javascript* apps (e.g. a *Web server*) outside of a *Web Browser*
+- 1.4. **NodeJS**: a runtime environment which allows to run *Javascript* apps (e.g. a *Web server*) outside of a *Web Browser*
 
    - Download and install the *NodeJS* installer: https://nodejs.org/en/download/
 
      > It's advised to select 'LTS' which is the stable version (*Long Term Support*)
+     
+   - Install **webpack-dev-server**
+
+     - Open a command prompt
+     - Select Disc C: type `C:` then hit [Return] key
+     - Type `npm i -g webpack-dev-server` 
+     - This will install `webpack-dev-server` globally 
+
+     
 
 - 1.5. **PostgresQL**: a popular *RDBMS* (Relational Database Management System)
 
@@ -112,11 +121,11 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
    - 1.5.8. Download *GIS data* for *Atlas Of Thrones* map
 
        - Open the following link in your *Web Browser*
-     
+       
          ```
          https://github.com/Echopraxium/Atlas-Of-Thrones/blob/backend-starter/data/gis/atlas_of_thrones.sql
          ```
-     
+       
      - Select `Raw` in the *File toolbar* ![File Toolbar](https://raw.githubusercontent.com/Echopraxium/Atlas-Of-Thrones/backend-starter/assets/icons/github_file_toolbar.png "File toolbar") which is above the file content (NB: it's a *database sql dump*)
      
      - Put the mouse cursor over the sql text, then right click and choose "**Save As...**", select  `C:\AOT` as the destination folder
@@ -168,7 +177,7 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
         ```
 
 
-### 2. Backend setup (Windows 10)
+### 2. Backend setup (Windows 10 - 64 bits)
 
 - 2.1. *Backend* (Server side) installation
   - Open a command prompt
@@ -193,17 +202,18 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
   > Note: the username in the **DATABASE_URL** entry must match your *PostgresQL* user credentials, hence it is "**gotfan**" as explained in Chapter 1 paragraph 4  (installation of *PostgresQL*).
 
 - 2.3. Start the *API Server*
-  - Open a command prompt
-
-  - `npm start`
-
-    This will start the *API server* on `localhost:5000`, you should see:
-
+  
+- Open a command prompt
+  
+- `npm start`
+  
+  This will start the *API server* on `localhost:5000`, you should see:
+  
     ```
     info: Server listening at port 5000
     info: Connected To atlas_of_thrones at localhost:5432
-    ```
-
+  ```
+  
 - 2.4. Test `hello` API endpoint
 
   Open a *Web Browser* and type `localhost:5000/hello` in the URL input field.
@@ -216,7 +226,7 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
 
   > You should see a page with a text like this `{"now": "2021-01-28T16:17:47.319Z"}`
 
-- 2.6. Test of`GeoJSON` API endpoint: Show Regions then Castles
+- 2.6. Test of`GeoJSON` API endpoint: Show **Regions** then **Castles locations**
 
   - Open a *Web Browser* and type `http://localhost:5000/kingdoms`
 
@@ -228,11 +238,58 @@ Here are the prerequisite **tools** and **howtos** which must be explained befor
     https://cdn.patricktriest.com/atlas-of-thrones/geojsonpreview.html
     ```
 
-  - Paste *GeoJSON* *data* (`CTRL V`) in the text box (where it's written '*Parse GeoJSON Here*' then push `Render`)
+  - Paste *GeoJSON* *data* (`CTRL V`) in the text box (where it's written '*Parse GeoJSON Here*' then push `Render`). 
+
+    > You should see the **Regions** displayed on the Map.
 
   - Open a new tab of the *Web Browser* and type `http://localhost:5000/locations/castle`
 
   - Copy All *GeoJSON* *data* (`CTRL A`   `CTRL C`)
+  
+  - Select the tab with *GeoJSON Preview page* and Paste *GeoJSON* *data* (`CTRL V`) in the text box  then push `Render`). 
+  
+    > You should see the **Castle locations** displayed on the Map.
 
-  - Select the tab with *GeoJSON Preview page* and Paste *GeoJSON* *data* (`CTRL V`) in the text box  then push `Render`)
 
+### 3. Frontend setup (Windows 10 - 64 bits)
+
+- 3.1. Start the *API Server* (Web service on Port 5000)
+
+  - Open a command prompt
+
+  - `npm start`
+
+    This will start the *API server* on `localhost:5000`, you should see:
+
+    ```
+    info: Server listening at port 5000
+    info: Connected To atlas_of_thrones at localhost:5432
+    ```
+
+- 3.2. Start *Webpack* and the *Web Server*
+
+  - Open a command prompt
+
+  - `npm run serve`. You should see the following output in the *Command prompt window*:
+
+    ```
+    > atlas-of-thrones@0.8.0 serve D:\_Dev\_00_github\Echopraxium\Atlas-Of-Thrones
+    > webpack serve --content-base ./public/
+    
+    i ｢wds｣: Project is running at http://localhost:8080/
+    i ｢wds｣: webpack output is served from /
+    i ｢wds｣: Content not from webpack is served from ./public/
+    i ｢wdm｣: Hash: a63743028ac4240a7c89
+    Version: webpack 4.46.0
+    Time: 1831ms
+    Built at: 2021-02-01 22:09:11
+        Asset      Size  Chunks                    Chunk Names
+    bundle.js  2.35 MiB       0  [emitted]  [big]  main
+    Entrypoint main [big] = bundle.js
+     [3] ./node_modules/leaflet/dist/leaflet-src.js 421 KiB {0} [built]
+     ...
+    61 hidden modules
+    i ｢wdm｣: Compiled successfully.
+    ```
+
+    

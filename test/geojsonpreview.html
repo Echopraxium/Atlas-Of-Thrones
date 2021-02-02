@@ -39,9 +39,28 @@
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
 <script>
         this.map = L.map('mapid').setView([10, 30], 4);
+		
+		let basemap_publisher = '/ramirocartodb'
+		basemap_publisher = 'public'
+		
+		let carto_basemap_url = 'https://cartocdn-gusc.global.ssl.fastly.net/' + basemap_publisher
+		
+		let basemap = 'tpl_756aec63_3adb_48b6_9d14_331c6cbc47cf'
+		basemap = 'tpl_d6e601f7_409f_43fb_9015_76d5fd978dea'
+		
+		let map_url = carto_basemap_url + '/api/v1/map/named/' + basemap + '/all/{z}/{x}/{y}.png'
+		console.log(map_url)
+		
+		// https://cartocdn-gusc.global.ssl.fastly.net/public/api/v1/map/static/named/tpl_d6e601f7_409f_43fb_9015_76d5fd978dea/1200/800.png
+        L.tileLayer(
+          map_url,
+          { crs: L.CRS.EPSG4326 }).addTo(this.map);
+		
+		/*
         L.tileLayer(
           'https://cartocdn-gusc.global.ssl.fastly.net//ramirocartodb/api/v1/map/named/tpl_756aec63_3adb_48b6_9d14_331c6cbc47cf/all/{z}/{x}/{y}.png',
           { crs: L.CRS.EPSG4326 }).addTo(this.map);
+		  */
 
         function loadGeojson () {
           let geojsonElem = document.getElementById('geojson-text-area')
