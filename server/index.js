@@ -2,14 +2,16 @@
  * Koa Server Index File
  */
 
-const Koa = require('koa')
+const Koa  = require('koa')
 const cors = require('kcors')
-const log = require('./logger')
-const api = require('./api')
+const log  = require('./logger')
+const api  = require('./api')
 
 // Setup Koa app
-const app = new Koa()
+const app  = new Koa()
 const port = process.env.PORT || 5000
+
+const HOST_IP = process.env.HOST_INTERNAL_IP || "127.0.0.1";
 
 // Apply CORS config
 const origin = process.env.CORS_ORIGIN | '*'
@@ -46,4 +48,7 @@ app.use(async (ctx, next) => {
 app.use(api.routes(), api.allowedMethods())
 
 // Start the app
-app.listen(port, () => { log.info(`Server listening at port ${port}`) })
+// https://superuser.com/questions/582624/how-to-access-nodejs-server-on-lan
+//console.log("------ LANG: " + LANG)
+//log.info("------ LANG: " + LANG)
+app.listen(port, HOST_IP, () => { log.info(`Server listening at port ${port}`) })

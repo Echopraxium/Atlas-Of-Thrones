@@ -8,7 +8,7 @@
     "start_local": "NODE_ENV=local node index.js",
     "web_server": "http-server ./public",
     "webpack_watch": "webpack --watch",
-    "serve": "webpack serve --content-base ./public/",
+    "serve": "webpack serve --host 0.0.0.0 --content-base ./public/",
     "dev": "npm-run-all -p start_local serve",
     "build": "NODE_ENV=production webpack"
   },
@@ -29,6 +29,7 @@
     "node": "^12.0.0"
   },
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "axios": "^0.21.1",
     "dotenv": "8.2.0",
     "file-loader": "^6.0.0",
@@ -40,9 +41,12 @@
     "koa-router": "^7.2.1",
     "leaflet": "^1.7.1",
     "leaflet-draw": "^1.0.4",
+    "local-ip": "^2.0.0",
     "pg": "8.5.1",
+    "ping": "^0.4.0",
     "webpack-dev-server": "^3.11.2",
-    "winston": "2.3.1"
+    "winston": "2.3.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "babel-loader": "^7.1.5",

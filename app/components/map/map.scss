@@ -8,19 +8,33 @@
   top: 0;
   left: 0;
   
+  .city_icon {
+     filter: invert(11%) sepia(21%) saturate(2878%) 
+	 hue-rotate(146deg) brightness(104%) contrast(97%);
+  }
+  
   .default_label {
     position: absolute;
   }
   
   .french_label {
-    color: green;
-	font-weight: bold;
+    color: lightgrey;
+    text-shadow:
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px 1px 0  #000,
+       1px 1px 0  #000;
     position: absolute;
   }
   
   .no_french_label {
-    color: red;
-	position: absolute;
+    color: lightgreen;
+    text-shadow:
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px 1px 0  #000,
+       1px 1px 0  #000;
+    position: absolute;
   }
 
   /** Leaflet Style Overrides **/
@@ -34,8 +48,10 @@
   }
 
   .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: $lightDark;
-    color: $offWhite;
+    /*background: $lightDark;*/
+    /*color: $offWhite;*/
+	color:      $selectedLabelColor;
+	background: $selectedLabelBgColor;
     text-align: center;
   }
 
@@ -45,7 +61,7 @@
 
   .leaflet-control-zoom-in, .leaflet-control-zoom-out {
     background: $lightDark;
-    color: $offWhite;
+    color:  $offWhite;
     border: none;
   }
 
